@@ -1,14 +1,32 @@
+import os
+import pandas as pd
+
 # Defining the teams list and their corresponding codes
-teams_list = ['Arsenal', 'Aston Villa', 'Bournemouth', 'Brentford', 'Brighton and Hove Albion', 'Burnley', 'Cardiff City', 'Chelsea', 'Crystal Palace', 'Everton', 'Fulham', 'Huddersfield Town', 'Leeds United', 'Leicester City', 'Liverpool', 'Luton Town', 'Manchester City', 'Manchester United', 'Newcastle United', 'Norwich City', 'Nottingham Forest', 'Sheffield United', 'Southampton', 'Tottenham Hotspur', 'Watford', 'West Bromwich Albion', 'West Ham United', 'Wolverhampton Wanderers']
+teams_list = ['Arsenal', 'Aston Villa',
+              'Bournemouth', 'Brentford', 'Brighton and Hove Albion', 'Burnley',
+              'Cardiff City', 'Chelsea', 'Crystal Palace',
+              'Everton',
+              'Fulham',
+              'Huddersfield Town',
+              'Leeds United', 'Leicester City', 'Liverpool', 'Luton Town',
+              'Manchester City', 'Manchester United',
+              'Newcastle United', 'Norwich City', 'Nottingham Forest',
+              'Sheffield United', 'Southampton',
+              'Tottenham Hotspur', 'Watford',
+              'West Bromwich Albion', 'West Ham United', 'Wolverhampton Wanderers']
 
 teams_code = list(range(1, len(teams_list) + 1))
+# starting from 1 up to the total number of teams in teams_list
+# The len(teams_list) + 1 ensures that the range includes numbers up to the length of the teams_list
+# This results in a list of unique codes assigned to each team for identification purposes
 
-# Mapping teams to their codes
+# Mapping teams to their codes. Reversal as well to future proof the code.
 team_mapping = dict(zip(teams_list, teams_code))
 
 # Reverse mapping (codes to teams)
 reverse_team_mapping = dict(zip(teams_code, teams_list))
-
+# The zip() function pairs each element from teams_list with its corresponding element from teams_code
+# This results in pairs like ('Arsenal', 1), ('Aston Villa', 2), ('Bournemouth', 3), and so on
 
 # create a mapped list to encode hours from noon to 8 PM
 hour_mapping = {
@@ -28,13 +46,35 @@ days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun
 days_code = list(range(7))
 
 
+def user_inputs(venue_code, opp_code, hour, day_code, team_code):
+    user_input = {"venue_code": [venue_code], "opp_code": [opp_code], "hour": [hour], "day_code": [day_code], "team_code": [team_code]}
+    user_input_df = pd.DataFrame(user_input)
+    print("Here is your input:")
+    print(user_input_df)
+    confirm = input("Are you happy with your selections? (y/n): ").lower()
+
+    if confirm == "y":
+        # Save user input data to a CSV file
+        user_input_df.to_csv("./epl_2/user_input.csv", index=False)
+        print("User input saved to user_input.csv")
+    else:
+        print("User input was not saved.")
+
+
 # print the teams list with corresponding codes ask the user to input the code of the team they want to predict
 # the match for
 # print the list of teams
 
 print('Select a team from the list below:')
-for i, team in enumerate(teams_list):
-    print(f'{i+1}. {team}')
+max_team_length = max(len(team) for team in teams_list)  # Find the maximum length of team names
+columns = 4  # Number of columns for display
+teams_per_column = (len(teams_list) + columns - 1) // columns  # Calculate number of teams per column
+for i in range(teams_per_column):
+    # Print each row with teams in multiple columns
+    row = ''
+    for j in range(i, len(teams_list), teams_per_column):
+        row += f"{j + 1:2}. {teams_list[j]:<{max_team_length + 2}}"
+    print(row)
 
 # ask the user to input the code of the team they want to predict the match for   
      
@@ -70,11 +110,18 @@ print(f"Selected venue: {venue}")
 
 
 # ask the user to input the code of the opponent
-print('Select an opponent from the list below:')
 while True:
     print("Available opponents:")
-    for i, team in enumerate(teams_list):
-        print(f'{i+1}. {team}')
+    max_opponent_length = max(len(team) for team in teams_list)  # Find the maximum length of opponent names
+    columns = 4  # Number of columns for display
+    opponents_per_column = (len(teams_list) + columns - 1) // columns  # Calculate number of opponents per column
+    for i in range(opponents_per_column):
+        # Print each row with opponents in multiple columns
+        row = ''
+        for j in range(i, len(teams_list), opponents_per_column):
+            row += f"{j + 1:2}. {teams_list[j]:<{max_opponent_length + 2}}"
+        print(row)
+    
     opp_code = input('Enter the code of the opponent: ')
 
     if opp_code.isdigit() and 1 <= int(opp_code) <= len(teams_list):
@@ -95,7 +142,7 @@ while True:
     for hour in hour_mapping:
         print(hour)
         
-    selected_hour = input('What time is the match at? (Enter the hour in "HH:MM" format): ')
+    selected_hour = input('What time is the match at? (Enter the hour in "HH:MM" format between 12:00 and 8:00): ')
 
     if selected_hour in hour_mapping:
         hour = hour_mapping[selected_hour]
@@ -103,7 +150,7 @@ while True:
     else:
         print("Invalid input! Please enter a valid hour in the format 'HH:MM'.")
 
-print(f"Selected hour: {selected_hour} (Encoded: {hour})")
+print(f"Selected hour: {selected_hour} (Code: {hour})")
 
 
 
@@ -124,8 +171,4 @@ while True:
 
 print(f"Selected day: {days[selected_day_index - 1]} (Code: {day_code})")
 
-
-
-
-user_input = [venue_code, opp_code, hour, day_code, team_code]
-print(user_input)
+user_inputs(venue_code, opp_code, selected_hour, day_code, team_code)
