@@ -1,5 +1,6 @@
-import os
-import pandas as pd
+import pandas as pd 
+
+# Load the model   
 
 # Defining the teams list and their corresponding codes
 teams_list = ['Arsenal', 'Aston Villa',
@@ -12,8 +13,9 @@ teams_list = ['Arsenal', 'Aston Villa',
               'Manchester City', 'Manchester United',
               'Newcastle United', 'Norwich City', 'Nottingham Forest',
               'Sheffield United', 'Southampton',
-              'Tottenham Hotspur', 'Watford',
-              'West Bromwich Albion', 'West Ham United', 'Wolverhampton Wanderers']
+              'Tottenham Hotspur',
+              'Watford', 'West Bromwich Albion', 'West Ham United', 'Wolverhampton Wanderers'
+              ]
 
 teams_code = list(range(1, len(teams_list) + 1))
 # starting from 1 up to the total number of teams in teams_list
@@ -171,4 +173,4 @@ while True:
 
 print(f"Selected day: {days[selected_day_index - 1]} (Code: {day_code})")
 
-user_inputs(venue_code, opp_code, selected_hour, day_code, team_code)
+user_inputs(venue_code, opp_code, hour, day_code, team_code)
