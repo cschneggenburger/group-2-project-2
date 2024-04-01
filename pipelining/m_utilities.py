@@ -162,5 +162,82 @@ def create_rf_model(matches):
 
     return (rf_model, test_accuracy, train_accuracy, contingency_table, class_report, feature_names)
 
+def user_inputs_to_df(venue_code, opp_code, hour, day_code, team_code):
+    user_input = {"venue_code": [venue_code],
+                  "opp_code": [opp_code],
+                  "hour": [hour],
+                  "day_code": [day_code],
+                  "team_code"[team_code]}
+    user_input_df = pd.DataFrame(user_input)
+    print("Here is your input:")
+    print(user_input_df)
+    confirm = input("Are you happy with your selections? (y/n): ").lower()
+
+    if confirm == "y":
+        print("User input saved to user_input.csv")
+        return user_input_df
+    else:
+        print("User input was not saved.")
+
+def user_input_prediction(user_inputs):
+    """
+    This function takes in the user input dataframe and adds in the rest of the team stats and features to pass
+    to the model for predictions.
+    """
+    
+    team_1_columns = ['last_3_results',
+                      'last_3_gf',
+                      'last_3_ga',
+                      'last_3_avg_poss']
+
+
+    team_2_columns= ['last_3_results',
+                     'last_3_gf',
+                     'last_3_ga',
+                     'last_3_avg_poss']
+
+    opponent_columns_heading = ['opp_last_3_results',
+                                'opp_last_3_gf',
+                                'opp_last_3_ga',
+                                'opp_last_3_avg_poss']
+    
+    # Defining the teams list and their corresponding codes
+    teams_list = ['Arsenal', 'Aston Villa',
+                  'Bournemouth', 'Brentford', 'Brighton and Hove Albion', 'Burnley',
+                  'Cardiff City', 'Chelsea', 'Crystal Palace',
+                  'Everton',
+                  'Fulham',
+                  'Huddersfield Town',
+                  'Leeds United', 'Leicester City', 'Liverpool', 'Luton Town',
+                  'Manchester City', 'Manchester United',
+                  'Newcastle United', 'Norwich City', 'Nottingham Forest',
+                  'Sheffield United', 'Southampton',
+                  'Tottenham Hotspur',
+                  'Watford', 'West Bromwich Albion', 'West Ham United', 'Wolverhampton Wanderers'
+                  ]
+    
+    # Assuming is your DataFrame, 'team_name' is the name of the team, and 'team' is the column with team names
+    # subtract 1 from the team code in the User_input dataframe to get the team name from the teams_list and store as a veriable
+    team_1_name = teams_list[user_input["team_code"].values[0] - 1]
+    team_1_data = matches.loc[matches['team'] == team_1_name, team_1_columns]
+    # subtract 1 from the opp_code in the User_input dataframe to get the team name from the teams_list and store as a veriable
+    team_2_name = teams_list[user_input["opp_code"].values[0] - 1]
+    team_2_data = matches.loc[matches['team'] == team_2_name, team_2_columns]
+    # Get the last row
+    last_values_1 = team_1_data.iloc[-1]
+    last_values_2 = team_2_data.iloc[-1]
+
+    #create a new DataFrame with the last values 1 using the 'team_1_columns' as column names
+    team_1_last_values = pd.DataFrame(last_values_1.values.reshape(1, -1), columns=team_1_columns)
+    #display(team_1_last_values)
+    #create a new DataFrame with the last values 2 using the 'opponent_column_headings' as column names
+    team_2_last_values = pd.DataFrame(last_values_2.values.reshape(1, -1), columns=opponent_columns_heading)
+    #display(team_2_last_values)
+    #create a new dataframe with the user input using the 'user_input_columns' as column names
+    user_input_df = pd.DataFrame(np.array(user_input).reshape(1, -1), columns=user_input_columns)
+    #display(user_input_df)
+    
+    return prediction_df
+
 if __name__ == "__main__":
     print("This script should not be run directly! Import these functions for use in another file.")
