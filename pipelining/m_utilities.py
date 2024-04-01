@@ -1,6 +1,7 @@
 #Dependencies
 import pandas as pd
 import numpy as np
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
@@ -141,6 +142,9 @@ def create_rf_model(matches):
 
     # Train the Random Forest classifier on the training data using specified predictors.
     rf_model = rf_model.fit(X_train, y_train)
+
+    # Save model for use in other files
+    joblib.dump(rf_model, "rf_model.joblib")
 
     # Generate predictions using the trained Random Forest classifier on the test data using specified predictors.
     # Train the Random Forest classifier on the training data using specified predictors.

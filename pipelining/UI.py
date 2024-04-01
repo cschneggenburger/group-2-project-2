@@ -1,6 +1,8 @@
-import pandas as pd 
+import pandas as pd
+import joblib 
 
 # Load the model   
+rf_model = joblib.load("rf_model.joblib")
 
 # Defining the teams list and their corresponding codes
 teams_list = ['Arsenal', 'Aston Villa',
