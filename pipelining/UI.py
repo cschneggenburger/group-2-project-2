@@ -1,5 +1,6 @@
 import pandas as pd
-import joblib 
+import joblib
+import m_utilities as utils
 
 # Load the model   
 rf_model = joblib.load("rf_model.joblib")
@@ -48,22 +49,6 @@ hour_mapping = {
 # Define days of the week and their corresponding codes
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 days_code = list(range(7))
-
-
-def user_inputs(venue_code, opp_code, hour, day_code, team_code):
-    user_input = {"venue_code": [venue_code], "opp_code": [opp_code], "hour": [hour], "day_code": [day_code], "team_code": [team_code]}
-    user_input_df = pd.DataFrame(user_input)
-    print("Here is your input:")
-    print(user_input_df)
-    confirm = input("Are you happy with your selections? (y/n): ").lower()
-
-    if confirm == "y":
-        # Save user input data to a CSV file
-        user_input_df.to_csv("./epl_2/user_input.csv", index=False)
-        print("User input saved to user_input.csv")
-    else:
-        print("User input was not saved.")
-
 
 # print the teams list with corresponding codes ask the user to input the code of the team they want to predict
 # the match for
@@ -175,4 +160,4 @@ while True:
 
 print(f"Selected day: {days[selected_day_index - 1]} (Code: {day_code})")
 
-user_inputs(venue_code, opp_code, hour, day_code, team_code)
+user_input_df = utils.user_inputs_to_df(venue_code, opp_code, hour, day_code, team_code)
