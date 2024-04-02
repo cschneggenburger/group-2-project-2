@@ -1,5 +1,7 @@
 # group-2-project-2
-Repo for Project 2 in our AI Bootcamp course.
+# English Premier League Match Results Prediction Model
+## Introduction
+> This repo contains machine learning code and other necessary files to predict EPL match results based on historical match data, team stats, and other factors.
 
 ## Important Premier League facts and changes
 
@@ -31,3 +33,15 @@ Repo for Project 2 in our AI Bootcamp course.
    - Goals ruled out for offside, handball, and fouls were reevaluated more accurately.
 
 In summary, VAR has both improved decision-making and sparked controversy, making it a topic of constant conversation in the Premier League. 📺⚽
+
+## Dependencies
+The following dependencies are required:
+- Python 3.x
+- pandas
+- numpy
+- scikit-learn
+- m_utilities
+- joblib
+- bs4
+
+
