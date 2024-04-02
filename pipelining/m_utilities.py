@@ -237,7 +237,22 @@ def user_input_prediction(user_inputs):
     user_input_df = pd.DataFrame(np.array(user_input).reshape(1, -1), columns=user_input_columns)
     #display(user_input_df)
     
-    return prediction_df
+    #concatenate the 'user_input_df''team_1_last_values', and 'team_2_last_values', DataFrames along the columns
+    combined_df = pd.concat([user_input_df, team_1_last_values, team_2_last_values], axis=1)
+    
+    combined_df = calculate_differentials(combined_df, 3)
+    
+    return combined_df
+
+#Calculate the comparison stats and add them to the dataframecomparison Stats
+def calculate_differentials(combined_df, window):
+    # Calculate the stat difference between the team and the opponent
+    combined_df['last_{}_gd'.format(window)] = combined_df['last_{}_gf'.format(window)] - combined_df['last_{}_ga'.format(window)]
+    combined_df['opp_last_{}_gd'.format(window)] = combined_df['opp_last_{}_gf'.format(window)] - combined_df['opp_last_{}_ga'.format(window)]
+    combined_df['last_{}_gd_diff'.format(window)] = combined_df['last_{}_gd'.format(window)] - combined_df['opp_last_{}_gd'.format(window)]
+    combined_df['last_{}_avg_poss_diff'.format(window)] = combined_df['last_{}_avg_poss'.format(window)] - combined_df['opp_last_{}_avg_poss'.format(window)]
+
+    return combined_df
 
 if __name__ == "__main__":
     print("This script should not be run directly! Import these functions for use in another file.")

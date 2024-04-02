@@ -161,3 +161,7 @@ while True:
 print(f"Selected day: {days[selected_day_index - 1]} (Code: {day_code})")
 
 user_input_df = utils.user_inputs_to_df(venue_code, opp_code, hour, day_code, team_code)
+combined_df = utils.user_input_prediction(user_input_df)
+
+preds = rf_model.predict(combined_df)
+preds
