@@ -158,9 +158,9 @@ while True:
     else:
         print("Invalid input! Please enter a valid day number.")
 
-print(f"Selected day: {days[selected_day_index - 1]} (Code: {day_code})")
+print(f"Selected day: {days[selected_day_index - 1]} (Code: {selected_day_index})")
 
-user_input_df = utils.user_inputs_to_df(venue_code, opp_code, hour, day_code, team_code)
+user_input_df = utils.user_inputs_to_df(int(venue_code), opp_code, hour, day_code, int(team_code))
 combined_df = utils.user_input_prediction(user_input_df)
 
 preds = rf_model.predict(combined_df)
