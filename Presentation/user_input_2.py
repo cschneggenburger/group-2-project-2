@@ -57,7 +57,7 @@ def user_inputs(venue_code, opp_code, hour, day_code, team_code):
 
     if confirm == "y":
         # Save user input data to a CSV file
-        user_input_df.to_csv("./epl_2/user_input.csv", index=False)
+        user_input_df.to_csv("/Presentation/Resources/user_input.csv", index=False)
         print("User input saved to user_input.csv")
     else:
         print("User input was not saved.")
