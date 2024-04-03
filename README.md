@@ -1,47 +1,49 @@
-# group-2-project-2
 # English Premier League Match Results Prediction Model
 ## Introduction
-> This repo contains machine learning code and other necessary files to predict EPL match results based on historical match data, team stats, and other factors.
+> This project leverages machine learning algorithms and data analysis techniques to predict EPL match results (wins, losses, and draws) based on historical match data, team stats, and other factors. This code is intended for sports analysts, EPL fans seeking to gain insights into match outcomes and team performance, and other data scientists exploring the application of machine learning in sports analytics and predictive modeling. 
 
-## Important Premier League facts and changes
+ Please note: This model is not intended to influence betting behaviors. Any use of the model for such purposes is entirely at the user's discretion and risk.
 
-| Event                 |  Date           |  
-| --------              | --------        |
-| introduction of VAR   | 2019/2020       |
-| Cell 4                | Cell 5          |
+## Project Team
+ - Abdul Dawson
+ - Casey Clayton
+ - Cassandra Griffin
+ - Cody Schneggenburger
+ - Dylan Ross
+ - Shantesh Dalal
 
----
-### Video Assistant Referee  
- **Video Assistant Referee (VAR)** has significantly impacted the **Premier League** since its introduction. Here are some key points:
+## Key Features
+ - **Machine Learning Models:** Utilizes Random Forest and Gradient Boosting to predict match outcomes accurately.
 
-1. **Improved Decision Accuracy**:
-   - VAR has raised the accuracy of key match decisions from **82%** (before its introduction) to **94%** in the 2019-20 season.
-   - It reviews critical incidents such as goals, penalties, and red cards, ensuring fair outcomes.
+ - **Feature Engineering:** The Project incorporates feature engineering techniques, including missing value imputation, datetime features, and feature interactions, to enhance the predictive effectiveness of the models. 
 
-2. **Overturned Decisions**:
-   - During the 2022-23 season, VAR led to **116 overturns**, affecting goals, disallowed goals, and penalties.
-   - It corrected errors, preventing unjust outcomes.
+ - **Evaluation Metrics:** The models' performance is assessed using evaluation metrics such as accuracy, precision, recall, and F1-score.
 
-3. **Controversy and Fan Perception**:
-   - Fans' opinions are divided. Some appreciate VAR's precision, while others find it disruptive.
-   - A survey revealed that **95%** of match-going fans felt VAR made watching games less enjoyable, and **44%** said they'd be less likely to attend matches due to it .
-   - Even TV viewers expressed dissatisfaction, with **94%** citing a negative impact.
+ - **Data Preprocessing:** The data set undergoes several preprocessing methodologies to clean, normalize, and transform it in preparation for modeling.
 
-4. **Challenges and Adaptation**:
-   - VAR's implementation led to debates about its impact on the flow of the game.
-   - Clubs adapted to its presence, with **109 on-pitch decisions overturned** in its debut season.
-   - Goals ruled out for offside, handball, and fouls were reevaluated more accurately.
+ - **External Factors:** External factors, including weather conditions, player injuries, and other team dynamics, were not used in the current models but are planned for future iterations.
 
-In summary, VAR has both improved decision-making and sparked controversy, making it a topic of constant conversation in the Premier League. 📺⚽
+## Data Collection
+ The data was pulled from "https://fbref.com/en/comps/9/Premier-League_Stats" using Python's BeautifulSoup web scraper. The scraped data is stored in the following files:
 
-## Dependencies
-The following dependencies are required:
-- Python 3.x
-- pandas
-- numpy
-- scikit-learn
-- m_utilities
-- joblib
-- bs4
+
+
+### Features
+
+These features were identified and grouped in order of importance.
+
+![image](https://github.com/cschneggenburger/group-2-project-2/assets/152223124/22273f7d-bdfd-4295-91f7-9be981ce807f)
+
+
+## Installation
+
+The Resources folder contains the various data sets and user input files.
+
+
+
+
+
+## Code Snippets
+
 
 
