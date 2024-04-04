@@ -124,7 +124,9 @@ Testing Accuracy of 74.96%**
 
 ## Next Steps
 
-Future iterations of this model will explore additional factors such as weather conditions, player injuries, red cards, and team dynamics. An interactive user input component is also in production.
+Future iterations are contained in the future developments folder of this repo which will explore additional factors such as weather conditions, player injuries, red cards, and team dynamics. An interactive user input component is also in production inside that folder as well but is incomplete at this time.
+
+The previous models folder houses older unused notebooks for the current model but are progress checkpoints for the team to see previous progress and revert to should problems arise in the main model folder. 
 
 
 
