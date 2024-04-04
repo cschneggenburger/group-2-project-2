@@ -35,6 +35,8 @@ The most important features were identified and grouped in order of importance.
 
 ## Installation
 
+The production version of this machine learning model lives in the Presentation folder and all files referred to below are housed there as well. 
+
 The project begins with the [scraper.ipynb](Presentation/scraper.ipynb) file using Python's BeautifulSoup library. 
 
 The scraper file requires the following dependencies:
